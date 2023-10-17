@@ -25,8 +25,9 @@ export default function ThemeProviderView({ children } : ThemeProviderViewProps)
       }}
       >
         <StatusBar
-          style="dark"
+          style="light"
           backgroundColor={theme.colors.background}
+          translucent
         />
         {children}
       </View>

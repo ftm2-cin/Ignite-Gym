@@ -1,5 +1,5 @@
 import citi from './citi.svg';
 
 export {
-  citi,
+  citi, //eslint-disable-line
 };
