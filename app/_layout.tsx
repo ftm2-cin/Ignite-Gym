@@ -1,4 +1,5 @@
 import { Slot, SplashScreen } from "expo-router";
+import { NativeBaseProvider } from "native-base";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import {
@@ -8,7 +9,7 @@ import {
   Barlow_600SemiBold,
 } from "@expo-google-fonts/barlow";
 import { useCallback } from "react";
-import { ThemeProvider } from "@components";
+import { THEME } from "../src/theme/theme"
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,9 +33,9 @@ export default function Layout() {
 
   return (
     <SafeAreaProvider onLayout={onLayoutRootView}>
-      <ThemeProvider>
+      <NativeBaseProvider theme={THEME}>
         <Slot />
-      </ThemeProvider>
+      </NativeBaseProvider>
     </SafeAreaProvider>
   );
 }
