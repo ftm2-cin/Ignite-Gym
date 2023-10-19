@@ -1,8 +1,8 @@
 import React from "react";
-import { Loading } from "@components";
+import { SignInScreen } from "@screens"
 
 export default function App() {
   return (
-      <Loading />
+    <SignInScreen/>
   );
 }

@@ -8,6 +8,7 @@
       "@assets": ["./src/assets"],
       "@contexts": ["./src/contexts"],
       "@icons": ["./src/assets/icons"],
+      "@screens": ["./src/screens"],
     },
     "types": []
   }

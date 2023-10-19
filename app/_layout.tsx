@@ -1,5 +1,5 @@
 import { Slot, SplashScreen } from "expo-router";
-import { NativeBaseProvider } from "native-base";
+import { NativeBaseProvider, StatusBar } from "native-base";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import {
@@ -34,6 +34,7 @@ export default function Layout() {
   return (
     <SafeAreaProvider onLayout={onLayoutRootView}>
       <NativeBaseProvider theme={THEME}>
+        <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
         <Slot />
       </NativeBaseProvider>
     </SafeAreaProvider>
