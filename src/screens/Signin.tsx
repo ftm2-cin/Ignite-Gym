@@ -5,7 +5,7 @@ import Logo from '@assets/logo.svg';
 
 export default function SignInScreen() {
     return (
-    <VStack flex={1} bg='gray.700'>
+    <VStack flex={1} bg='gray.700' px={5}>
         <Image source={BackGroundImg} alt="Treino" resizeMode='contain' position='absolute'/>
         <Center my={24}>
             <Logo/>
@@ -17,8 +17,15 @@ export default function SignInScreen() {
         <Heading color="gray.100" textAlign="center" fontSize="xl" fontWeight="bold" mb={6}>
             Acesse sua conta
         </Heading>
-        <Input placeholder='Email' />
-        <Input placeholder='Senha' />
+        <Input 
+            placeholder='Email'
+            keyboardType='email-address'
+            autoCapitalize='none'
+         />
+        <Input 
+            placeholder='Senha'
+            secureTextEntry
+         />
     </VStack>
     );
   }
