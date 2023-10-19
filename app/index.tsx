@@ -1,8 +1,8 @@
 import React from "react";
-import { SignInScreen } from "@screens"
+import { SignUpScreen } from "@screens"
 
 export default function App() {
   return (
-    <SignInScreen/>
+    <SignUpScreen/>
   );
 }

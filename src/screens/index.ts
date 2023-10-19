@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
 import SignInScreen from "./Signin";
+import SignUpScreen from "./Signup";
 
-export { SignInScreen };
+export { SignInScreen, SignUpScreen };
