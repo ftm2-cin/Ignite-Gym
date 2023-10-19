@@ -10,6 +10,3 @@ npm-debug.*
 web-build/
 yarn-error.log
 package-lock.json
-
-# macOS
-.DS_Store

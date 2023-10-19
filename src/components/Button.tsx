@@ -1,19 +1,29 @@
-import { Button as NativeBaseButton , Center, IButtonProps} from "native-base";
+import { Button as NativeBaseButton , IButtonProps, Text} from "native-base";
 
-export default function Button({ ...props }: IButtonProps) {
+type ButtonProps = IButtonProps & {
+  title: string;
+};
+
+export default function Button({title, variant, ...props}: ButtonProps) {
   return (
-    <Center>
-        <NativeBaseButton
-            bg="gray.700"
-            h={14}
-            px={4}
-            borderWidth={0}
-            fontSize="md"
-            color="white"
-            fontFamily="body"
-            mb={4}
-            {...props}
-        />
-    </Center>
+      <NativeBaseButton
+        w="full"
+        h={14}
+        mb={6}
+        bg={ variant == "outline" ? "transparent" : "green.500"}
+        borderWidth={ variant == "outline" ? 1 : 0}
+        borderColor="green.500"
+        rounded={"sm"}
+        _pressed={{ bg: variant == "outline" ? "gray.500" : "green.600"}}
+        {...props}
+      >
+      <Text
+        fontSize="sm"
+        fontWeight="bold"
+        color={ variant == "outline" ? "green.500" : "white"}
+      >
+        {title}
+      </Text>
+      </NativeBaseButton>
   );
 }
