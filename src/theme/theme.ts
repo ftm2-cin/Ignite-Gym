@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { extendTheme } from 'native-base';
 
 export const THEME = extendTheme({
@@ -22,8 +21,8 @@ export const THEME = extendTheme({
     }
   },
   fonts: {
-    heading: 'Barlow_700Bold',
-    body: 'Barlow_400Regular',
+    heading: 'Roboto_700Bold',
+    body: 'Roboto_400Regular',
   },
   fontSizes: {
     xs: 12,

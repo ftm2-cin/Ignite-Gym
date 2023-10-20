@@ -2,12 +2,19 @@ import {VStack, Image, Center, Text, Heading, ScrollView} from 'native-base';
 import { Input, Button } from "@components"
 import BackGroundImg from '@assets/background.png';
 import Logo from '@assets/logo.svg';
+import { useNavigation } from '@react-navigation/native';
 
 export default function SignUpScreen() {
+
+    const navigation = useNavigation();
+
+    const handlegoBack = () => {
+        navigation.goBack();
+    }
     return (
         <ScrollView contentContainerStyle = {{ flexGrow: 1}}>
-            <VStack flex={1} bg='gray.700' px={5}>
-                <Image source={BackGroundImg} alt="Treino" resizeMode='contain' position='absolute'/>
+            <VStack flex={1} px={5}>
+                <Image source={BackGroundImg} defaultSource={BackGroundImg} alt="Treino" resizeMode='contain' position='absolute'/>
                 <Center my={24}>
                     <Logo/>
                     <Text color="gray.100" fontSize="sm">
@@ -31,7 +38,7 @@ export default function SignUpScreen() {
                     secureTextEntry
                 />
                 <Button title='Criar e acessar'/>
-                <Button title='Voltar para login' variant="outline" mt={24}/>
+                <Button title='Voltar para login' variant="outline" mt={24} onPress={handlegoBack}/>
             </VStack>
         </ScrollView>
     );
