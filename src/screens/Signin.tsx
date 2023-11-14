@@ -13,7 +13,13 @@ export default function SignInScreen() {
     return (
         <ScrollView contentContainerStyle = {{ flexGrow: 1}}>
             <VStack flex={1} px={5}>
-                <Image source={BackGroundImg} defaultSource={BackGroundImg} alt="Treino" resizeMode='contain' position='absolute'/>
+                <Image 
+                    source={BackGroundImg} 
+                    defaultSource={BackGroundImg} 
+                    alt="Treino" 
+                    resizeMode='contain' 
+                    position='absolute'
+                />
                 <Center my={24}>
                     <Logo/>
                     <Text color="gray.100" fontSize="sm">
@@ -21,7 +27,13 @@ export default function SignInScreen() {
                     </Text>
 
                 </Center>
-                <Heading color="gray.100" textAlign="center" fontSize="xl" fontWeight="bold" mb={6}>
+                <Heading 
+                    color="gray.100" 
+                    textAlign="center" 
+                    fontSize="xl" 
+                    fontWeight="bold" 
+                    mb={6}
+                >
                     Acesse sua conta
                 </Heading>
                 <Input 

@@ -1,4 +1,3 @@
-import { Platform } from 'react-native';
 import { useTheme } from 'native-base';
 import { createBottomTabNavigator, BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { HomeScreen, ExerciseScreen, HistoryScreen, ProfileScreen } from "@screens";
