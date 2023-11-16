@@ -5,6 +5,7 @@ import HomeHeader from "./HomeHeader";
 import Group from "./Group";
 import ExerciseCard from "./ExerciseCard";
 import ScreenHeader from "./ScreenHeader";
+import HistoryCard from "./HistoryCard";
 export { 
     Loading, 
     Input, 
@@ -12,5 +13,6 @@ export {
     HomeHeader, 
     Group, 
     ExerciseCard,
-    ScreenHeader
+    ScreenHeader,
+    HistoryCard
 };
