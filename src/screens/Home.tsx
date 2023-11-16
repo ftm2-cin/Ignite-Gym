@@ -32,6 +32,7 @@ export default function HomeScreen() {
                     px: 5,
                 }}
                 maxH={10}
+                minH={10}
                 showsHorizontalScrollIndicator={false}
             />
             <VStack flex={1} px={5}>

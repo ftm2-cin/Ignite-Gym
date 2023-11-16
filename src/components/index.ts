@@ -7,6 +7,7 @@ import ExerciseCard from "./ExerciseCard";
 import ScreenHeader from "./ScreenHeader";
 import HistoryCard from "./HistoryCard";
 import UserPhoto from "./UserPhoto";
+import BoxExercise from "./BoxExercise";
 export { 
     Loading, 
     Input, 
@@ -16,5 +17,6 @@ export {
     ExerciseCard,
     ScreenHeader,
     HistoryCard,
-    UserPhoto
+    UserPhoto,
+    BoxExercise
 };
