@@ -1,15 +1,39 @@
-import {VStack, Image, Center, Text, Heading, ScrollView} from 'native-base';
+import { useState } from 'react';
 import { Input, Button } from "@components"
-import BackGroundImg from '@assets/background.png';
+import {VStack, Image, Center, Text, Heading, ScrollView, Alert} from 'native-base';
 import Logo from '@assets/logo.svg';
+import BackGroundImg from '@assets/background.png';
 import { useNavigation } from '@react-navigation/native';
+import { useForm, Controller } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+type FormData = {
+    name: string;
+    email: string;
+    password: string;
+    password_confirm: string;
+};
+
+const signUpSchema = yup.object().shape({
+    name: yup.string().required('Nome obrigatório'),
+    email: yup.string().email('E-mail inválido').required('E-mail obrigatório'),
+    password: yup.string().required('Senha obrigatória'),
+    password_confirm: yup.string().required('Confirmação de Senha obrigatória').oneOf([yup.ref('password')], 'Senhas não conferem'),
+})
 
 export default function SignUpScreen() {
-
+    const { control, handleSubmit, formState: {errors} } = useForm<FormData>({
+        resolver: yupResolver(signUpSchema)
+    });
     const navigation = useNavigation();
 
     const handlegoBack = () => {
         navigation.goBack();
+    }
+
+    function onSubmit({name, email, password, password_confirm}: FormData) {
+        console.log(name, email, password, password_confirm);
     }
     return (
         <ScrollView contentContainerStyle = {{ flexGrow: 1}}>
@@ -25,20 +49,62 @@ export default function SignUpScreen() {
                 <Heading color="gray.100" textAlign="center" fontSize="xl" fontWeight="bold" mb={6}>
                     Crie sua conta
                 </Heading>
-                <Input 
-                    placeholder='Nome'
+
+                <Controller 
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                        <Input 
+                            placeholder='Nome'
+                            onChangeText={onChange}
+                            value={value}
+                            error={errors.name?.message}
+                        />
+                    )}
+                    name="name"
                 />
-                <Input 
-                    placeholder='Email'
-                    keyboardType='email-address'
-                    autoCapitalize='none'
+
+                <Controller 
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                        <Input 
+                            placeholder='E-mail'
+                            onChangeText={onChange}
+                            value={value}
+                            error={errors.email?.message}
+                        />
+                    )}
+                    name="email"
                 />
-                <Input 
-                    placeholder='Senha'
-                    secureTextEntry
+
+                <Controller 
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                        <Input 
+                            placeholder='Senha'
+                            onChangeText={onChange}
+                            value={value}
+                            secureTextEntry
+                            error={errors.password?.message}
+                        />
+                    )}
+                    name="password"
                 />
-                <Button title='Criar e acessar'/>
-                <Button title='Voltar para login' variant="outline" mt={24} onPress={handlegoBack}/>
+                <Controller 
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                        <Input 
+                            placeholder='Confirme a senha'
+                            onChangeText={onChange}
+                            value={value}
+                            secureTextEntry
+                            error={errors.password_confirm?.message}
+                        />
+                    )}
+                    name="password_confirm"
+                />
+                
+                <Button title='Criar e acessar' onPress={handleSubmit(onSubmit)}/>
+                <Button title='Voltar para login' variant="outline" mt={18} onPress={handlegoBack}/>
             </VStack>
         </ScrollView>
     );
