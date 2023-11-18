@@ -10,6 +10,7 @@
       "@icons": ["./src/assets/icons"],
       "@screens": ["./src/screens"],
       "@services": ["./src/services"],
+      "@hooks": ["./src/hooks"],
     },
     "types": []
   }

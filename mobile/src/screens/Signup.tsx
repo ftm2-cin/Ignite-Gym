@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { Alert } from 'react-native';
 import { Input, Button } from "@components"
-import {VStack, Image, Center, Text, Heading, ScrollView, Alert} from 'native-base';
+import {VStack, Image, Center, Text, Heading, ScrollView, useToast } from 'native-base';
 import Logo from '@assets/logo.svg';
 import BackGroundImg from '@assets/background.png';
 import { useNavigation } from '@react-navigation/native';
@@ -8,6 +8,7 @@ import { useForm, Controller } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { api } from '@services';
+import { AppError } from '../utils/AppError';
 
 type FormData = {
     name: string;
@@ -33,18 +34,27 @@ export default function SignUpScreen() {
         navigation.goBack();
     }
 
+    const toast = useToast();
+
     async function onSubmit({name, email, password, password_confirm}: FormData) {
-        api.post('/users', {
-            name,
-            email,
-            password,
-            password_confirm
-        }).then(() => {
-            console.log('Sucesso!', 'Cadastro realizado com sucesso!');
+        try {
+            const response = await api.post('/users', {
+                name,
+                email,
+                password,
+                password_confirm
+            });
+            Alert.alert('Sucesso!', 'Conta criada com sucesso');
             navigation.goBack();
-        }).catch((error) => {
-            console.log(error);
-        })
+        } catch (error) {
+            const isAppError = error instanceof AppError;
+
+            toast.show({
+                title: isAppError ? error.message : 'Erro na criação da conta',
+                placement: 'top',
+                bgColor: 'red.500',
+            });
+        }
     }
 
     return (
