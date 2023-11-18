@@ -41,6 +41,14 @@ Follow these steps to set up and run the project on your local machine.
    ```bash
    yarn install
    ```
+3. Go to /api
+   ```bash
+   cd api
+   ```
+4. Install and start api:
+   ```bash
+   npm install && npm start
+   ```
 ### Running the App
 1. Start the development server:
    ```bash
