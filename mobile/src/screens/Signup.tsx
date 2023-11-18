@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useForm, Controller } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { api } from '@services';
 
 type FormData = {
     name: string;
@@ -32,9 +33,20 @@ export default function SignUpScreen() {
         navigation.goBack();
     }
 
-    function onSubmit({name, email, password, password_confirm}: FormData) {
-        console.log(name, email, password, password_confirm);
+    async function onSubmit({name, email, password, password_confirm}: FormData) {
+        api.post('/users', {
+            name,
+            email,
+            password,
+            password_confirm
+        }).then(() => {
+            console.log('Sucesso!', 'Cadastro realizado com sucesso!');
+            navigation.goBack();
+        }).catch((error) => {
+            console.log(error);
+        })
     }
+
     return (
         <ScrollView contentContainerStyle = {{ flexGrow: 1}}>
             <VStack flex={1} px={5}>

@@ -9,6 +9,7 @@
       "@contexts": ["./src/contexts"],
       "@icons": ["./src/assets/icons"],
       "@screens": ["./src/screens"],
+      "@services": ["./src/services"],
     },
     "types": []
   }
