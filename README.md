@@ -37,22 +37,28 @@ Follow these steps to set up and run the project on your local machine.
    ```bash
    git clone https://github.com/ftm2/ignite-gym
    ```
-2. Install project dependencies:
-   ```bash
-   yarn install
-   ```
-3. Go to /api
+2. Install apo dependencies:
    ```bash
    cd api
    ```
-4. Install and start api:
    ```bash
-   npm install && npm start
+   npm install
+   ```
+4. Install project dependencies:
+   ```bash
+   cd mobile
+   ```
+   ```bash
+   yarn install
    ```
 ### Running the App
-1. Start the development server:
+1. Start the api:
+   ```bash
+   npm start
+   ```
+2. Start the development server:
    ```bash
    yarn start
    ```
-2. Use the Expo Go app on your mobile device or an emulator to scan the QR code displayed in your terminal.
-3. The app will open on your mobile device, and you can start testing it.
+3. Use the Expo Go app on your mobile device or an emulator to scan the QR code displayed in your terminal.
+4. The app will open on your mobile device, and you can start testing it.
