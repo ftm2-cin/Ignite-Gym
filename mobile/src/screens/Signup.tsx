@@ -1,4 +1,4 @@
-import { Alert } from 'react-native';
+
 import { Input, Button } from "@components"
 import {VStack, Image, Center, Text, Heading, ScrollView, useToast } from 'native-base';
 import Logo from '@assets/logo.svg';
@@ -7,7 +7,9 @@ import { useNavigation } from '@react-navigation/native';
 import { useForm, Controller } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+
 import { api } from '@services';
+import { useAuth } from '../hooks/useAuth';
 import { AppError } from '../utils/AppError';
 
 type FormData = {
@@ -35,6 +37,7 @@ export default function SignUpScreen() {
     }
 
     const toast = useToast();
+    const { signIn } = useAuth();
 
     async function onSubmit({name, email, password, password_confirm}: FormData) {
         try {
@@ -44,8 +47,12 @@ export default function SignUpScreen() {
                 password,
                 password_confirm
             });
-            Alert.alert('Sucesso!', 'Conta criada com sucesso');
-            navigation.goBack();
+            toast.show({
+                title: 'Conta criada com sucesso!',
+                placement: 'top',
+                bgColor: 'green.500',
+            });
+            await signIn(email, password);
         } catch (error) {
             const isAppError = error instanceof AppError;
 
