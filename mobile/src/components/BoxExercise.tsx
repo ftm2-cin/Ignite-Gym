@@ -5,7 +5,7 @@ import Button from "./Button";
 
 
 type BoxExerciseProps = {
-    series: string;
+    series: number;
     repetitions: string;
     onPress?: () => void;
 }
@@ -15,12 +15,12 @@ export default function BoxExercise({onPress, series, repetitions}: BoxExerciseP
             <HStack alignItems="center" justifyContent="space-around" mb={6} mt={5}>
                 <HStack alignItems="center" mb={2}>
                     <SeriesSvg/>
-                    <Text color="gray.200" fontSize="sm" ml={2} textTransform="capitalize">{series}</Text>
+                    <Text color="gray.200" fontSize="sm" ml={2} textTransform="capitalize">{series} séries</Text>
                 </HStack>
 
                 <HStack alignItems="center" mb={2}>
                     <RepSvg/>
-                    <Text color="gray.200" fontSize="sm" ml={2} textTransform="capitalize">{repetitions}</Text>
+                    <Text color="gray.200" fontSize="sm" ml={2} textTransform="capitalize">{repetitions} repetições</Text>
                 </HStack>
             </HStack>
 

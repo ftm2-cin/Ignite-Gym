@@ -1,13 +1,14 @@
 import { HStack, Pressable, Text, Image, VStack, Heading, Icon } from "native-base";
 import { Entypo } from '@expo/vector-icons';
+import { api } from "../services/api";
+import { ExerciseDTO } from "../types/ExerciseDTO";
 
 type Props = {
-    name: string;
+    data: ExerciseDTO;
     onPress?: () => void;
 };
 
-
-export default function ExerciseCard({name, ...rest}: Props) {
+export default function ExerciseCard({data, ...rest}: Props) {
     return (
         <Pressable
             h={20}
@@ -24,7 +25,7 @@ export default function ExerciseCard({name, ...rest}: Props) {
         >
            <HStack p={2} alignItems="center" pr={4}>
                 <Image
-                    source={{ uri: 'https://blog.gsuplementos.com.br/wp-content/uploads/2021/04/iStock-1246046696.jpg'}}
+                    source={{ uri: `${api.defaults.baseURL}/exercise/thumb/${data.thumb}`}}
                     alt="Exercise Photo"
                     w={16}
                     h={16}
@@ -34,7 +35,7 @@ export default function ExerciseCard({name, ...rest}: Props) {
                     {...rest}
                 />
                 <VStack>
-                    <Heading fontSize="lg" color="white">{name}</Heading>
+                    <Heading fontSize="lg" color="white">{data.name}</Heading>
                     <Text color="gray.200" fontSize="sm" mt={1} numberOfLines={2}>3 séries x 12 repetições</Text>
                 </VStack>
                 <Icon

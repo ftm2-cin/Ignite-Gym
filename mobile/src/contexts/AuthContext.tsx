@@ -8,6 +8,7 @@ export type AuthContextDataProps = {
     user: UserDTO;
     signIn: (email : string, password : string ) => Promise<void>;
     signOut: () => Promise<void>;
+    updateUser: (user : UserDTO) => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContextDataProps>({} as AuthContextDataProps);
@@ -39,6 +40,11 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
         await removeAuthToken();
     }
 
+    async function updateUser(user : UserDTO) {
+        setUser(user);
+        await saveUser(user);
+    }
+
     async function loadUserStorageData() {
         const storagedUser = await getUser();
         const storagedToken = await getAuthToken();
@@ -54,7 +60,7 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
     , []);
 
     return (
-        <AuthContext.Provider value={{ user, signIn, signOut}}>
+        <AuthContext.Provider value={{ user, signIn, signOut, updateUser}}>
             {children}
         </AuthContext.Provider>
     );

@@ -1,38 +1,44 @@
-import { useState } from 'react';
-import { VStack, SectionList, Heading, Center } from 'native-base';
+import { useCallback, useState } from 'react';
+import { VStack, SectionList, Heading, Center, useToast} from 'native-base';
 import { ScreenHeader, HistoryCard } from '@components';
+import { api } from '../services/api';
+import { AppError } from '../utils/AppError';
+import { useFocusEffect } from '@react-navigation/native';
+import { HistoryByDayDTO } from '../types/HistoryByDayDTO';
 
 export default function HistoryScreen() {
+    const toast = useToast();
+    const [exercises, setExercises] = useState<HistoryByDayDTO[]>([]);
 
-    const [exercises, setExercises] = useState([
-        {
-            title: '26.08',
-            data: [
-                { name: 'Supino Reto', time: '30 mins', group: 'Chest' },
-                { name: 'Supino Inclinado', time: '20 mins', group: 'Chest' },
-                { name: 'Supino Declinado', time: '25 mins', group: 'Chest' },
-                { name: 'Crucifixo', time: '15 mins', group: 'Chest' }
-            ]
-        },
-        {
-            title: '27.08',
-            data: [
-                { name: 'Costas', time: '40 mins', group: 'Back' },
-                { name: 'Supino Inclinado', time: '20 mins', group: 'Chest' },
-                { name: 'Supino Declinado', time: '25 mins', group: 'Chest' },
-                { name: 'Crucifixo', time: '15 mins', group: 'Chest' }
-            ]
+    async function fetchHistory() {
+        try{
+            const response = await api.get(`/history`);
+            setExercises(response.data);
+        }catch
+        (error) {
+            const isAppError = error instanceof AppError;
+            const title = isAppError ? error.message : 'Erro ao buscar histórico';
+            toast.show({
+                 title,
+                 placement: 'top',
+                 bgColor: 'red.500',
+            });
         }
-    ]);
+    }
+
+    useFocusEffect(useCallback(() => {
+        fetchHistory();
+    }
+    , []));
 
     return (
         <VStack flex={1}>
             <ScreenHeader title="Histórico de Exercícios"/>
             <SectionList
                 sections={exercises}
-                keyExtractor={(item, index) => item.name + index}
+                keyExtractor={ item => item.id }
                 renderItem={({ item }) => (
-                    <HistoryCard name={item.name} time={item.time} group={item.group} />
+                    <HistoryCard name={item.name} time={item.hour} group={item.group} />
                 )}
                 renderSectionHeader={({ section: { title } }) => (
                     <Heading color="gray.200" fontSize="md" mt={8} mb={3}>{title}</Heading>
