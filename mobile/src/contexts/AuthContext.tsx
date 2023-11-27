@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { UserDTO } from '../types/UserDTO';
 import { api } from '@services';
 import { saveUser, getUser, removeUser } from '../storage/storageUser';
+import { saveAuthToken, getAuthToken, removeAuthToken } from '../storage/storageAuthToken';
 
 export type AuthContextDataProps = {
     user: UserDTO;
@@ -20,9 +21,12 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
                     email,
                     password
                 });
-                if (data) {
+                if (data.user && data.token) {
+                    await saveUser(data.user);
+                    await saveAuthToken(data.token);
+                    api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
                     setUser(data.user);
-                    saveUser(data.user);
+
                 }
         }catch(err){
             throw err ;
@@ -32,12 +36,15 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
     async function signOut() {
         setUser({} as UserDTO);
         await removeUser();
+        await removeAuthToken();
     }
 
     async function loadUserStorageData() {
         const storagedUser = await getUser();
-        if (storagedUser) {
+        const storagedToken = await getAuthToken();
+        if (storagedToken && storagedUser) {
             setUser(storagedUser);
+            api.defaults.headers.common['Authorization'] = `Bearer ${storagedToken}`;
         }
     }
     

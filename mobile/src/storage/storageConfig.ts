@@ -1,3 +1,5 @@
 const USER_STORAGE = '@user';
 
-export { USER_STORAGE };
+const AUTH_TOKEN_STORAGE = '@token';
+
+export { USER_STORAGE, AUTH_TOKEN_STORAGE };
